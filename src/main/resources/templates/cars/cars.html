@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Car List</title>
+</head>
+<body>
+    <h1>Cars</h1>
+    <a href="/myapp/cars/add">Add New Car</a>
+
+    <table>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Version</th>
+            <th>Number of Doors</th>
+            <th>CO2 Emission</th>
+            <th>Gross Price</th>
+            <th>Net Price</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.make}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.version}"></td>
+            <td th:text="${car.numberOfDoors}"></td>
+            <td th:text="${car.co2Emission}"></td>
+            <td th:text="${car.grossPrice}"></td>
+            <td th:text="${car.nettPrice}"></td>
+            <td>
+                <a th:href="@{/cars/edit/{id}(id=${car.id})}">Edit</a> |
+                <a th:href="@{/cars/delete/{id}(id=${car.id})}" onclick="return confirm('Are you sure you want to delete this car?');">Remove</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

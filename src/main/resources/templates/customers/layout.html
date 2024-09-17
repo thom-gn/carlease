@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Lease Management</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/customers}">Customers</a></li>
+            <li><a th:href="@{/cars}">Cars</a></li>
+            <li><a th:href="@{/carleases}">Car Leases</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Section -->
+    <div th:replace="${content}"></div>
+
+    <!-- Footer (Optional) -->
+    <footer>
+        <p>&copy; 2024 Car Lease Management System</p>
+    </footer>
+
+</body>
+</html>

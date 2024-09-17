@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Customer</title>
+</head>
+<body>
+    <h1>Add Customer</h1>
+    
+    <form action="#" th:action="@{/customers/add}" th:object="${customer}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+        <br />
+        
+        <label for="street">Street:</label>
+        <input type="text" id="street" th:field="*{street}" />
+        <br />
+        
+        <label for="houseNumber">House Number:</label>
+        <input type="text" id="houseNumber" th:field="*{houseNumber}" />
+        <br />
+        
+        <label for="zipCode">Zip Code:</label>
+        <input type="text" id="zipCode" th:field="*{zipCode}" />
+        <br />
+        
+        <label for="place">Place:</label>
+        <input type="text" id="place" th:field="*{place}" />
+        <br />
+        
+        <label for="emailAddress">Email Address:</label>
+        <input type="text" id="emailAddress" th:field="*{emailAddress}" />
+        <br />
+        
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" th:field="*{phoneNumber}" />
+        <br />
+        
+        <button type="submit">Add Customer</button>
+    </form>
+    
+    <a href="/myapp/customers">Back to Customer List</a>
+</body>
+</html>

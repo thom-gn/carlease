@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Car</title>
+</head>
+<body>
+    <h1>Update Car</h1>
+    <form th:action="@{/cars/update}" th:object="${car}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <label for="make">Make:</label>
+        <input type="text" th:field="*{make}" id="make" />
+        <br />
+        
+        <label for="model">Model:</label>
+        <input type="text" th:field="*{model}" id="model" />
+        <br />
+        
+        <label for="version">Version:</label>
+        <input type="text" th:field="*{version}" id="version" />
+        <br />
+        
+        <label for="numberOfDoors">Number of Doors:</label>
+        <input type="number" th:field="*{numberOfDoors}" id="numberOfDoors" />
+        <br />
+        
+        <label for="co2Emission">CO2 Emission:</label>
+        <input type="number" step="0.01" th:field="*{co2Emission}" id="co2Emission" />
+        <br />
+        
+        <label for="grossPrice">Gross Price:</label>
+        <input type="number" step="0.01" th:field="*{grossPrice}" id="grossPrice" />
+        <br />
+        
+        <label for="nettPrice">Nett Price:</label>
+        <input type="number" step="0.01" th:field="*{nettPrice}" id="nettPrice" />
+        <br />
+        
+        <button type="submit">Update</button>
+    </form>
+    <a href="/cars">Back to Car List</a>
+</body>
+</html>

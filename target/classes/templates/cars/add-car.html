@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Car</title>
+</head>
+<body>
+    <h1>Add Car</h1>
+    
+    <form action="#" th:action="@{/cars/add}" th:object="${car}" method="post">
+        <label for="make">Make:</label>
+        <input type="text" id="make" th:field="*{make}" />
+        <br />
+        
+        <label for="model">Model:</label>
+        <input type="text" id="model" th:field="*{model}" />
+        <br />
+        
+        <label for="version">Version:</label>
+        <input type="text" id="version" th:field="*{version}" />
+        <br />
+        
+        <label for="numberOfDoors">Number of Doors:</label>
+        <input type="number" id="numberOfDoors" th:field="*{numberOfDoors}" />
+        <br />
+        
+        <label for="co2Emission">CO2 Emission:</label>
+        <input type="number" step="0.01" id="co2Emission" th:field="*{co2Emission}" />
+        <br />
+        
+        <label for="grossPrice">Gross Price:</label>
+        <input type="number" step="0.01" id="grossPrice" th:field="*{grossPrice}" />
+        <br />
+        
+        <label for="nettPrice">Net Price:</label>
+        <input type="number" step="0.01" id="nettPrice" th:field="*{nettPrice}" />
+        <br />
+        
+        <button type="submit">Add Car</button>
+    </form>
+    
+    <a href="/myapp/cars">Back to Car List</a>
+</body>
+</html>

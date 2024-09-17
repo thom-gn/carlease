@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer List</title>
+</head>
+<body>
+    <h1>Customers</h1>
+	<a href="/myapp/customers/add">Add New Customer</a>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Street</th>
+            <th>House Number</th>
+            <th>Zip Code</th>
+            <th>Place</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.street}"></td>
+            <td th:text="${customer.houseNumber}"></td>
+            <td th:text="${customer.zipCode}"></td>
+            <td th:text="${customer.place}"></td>
+            <td th:text="${customer.emailAddress}"></td>
+            <td th:text="${customer.phoneNumber}"></td>
+			<td>
+				<a th:href="@{/customers/edit/{id}(id=${customer.id})}">Edit</a> |
+			    <a th:href="@{/customers/delete/{id}(id=${customer.id})}" onclick="return confirm('Are you sure you want to delete this customer?');">Remove</a>
+			</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Leases</title>
+</head>
+<body>
+    <h1>Car Leases</h1>
+    <a href="#" th:href="@{/carleases/add}">Add New Car Lease</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Lease ID</th>
+                <th>Customer</th>
+                <th>Car</th>
+                <th>Mileage</th>
+                <th>Duration</th>
+                <th>Interest Rate</th>
+				<th>Lease Rate</th>				
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="lease : ${carLeases}">
+                <td th:text="${lease.id}"></td>
+                <td th:text="${lease.customer.name}"></td>
+                <td th:text="${lease.car.make} + ' ' + ${lease.car.model}"></td>
+                <td th:text="${lease.mileage}"></td>
+                <td th:text="${lease.duration}"></td>
+                <td th:text="${lease.interestRate}"></td>
+				<td th:text="${lease.calculateLeaseRate()}"></td>				
+                <td>
+                    <a th:href="@{/carleases/edit/{id}(id=${lease.id})}">Edit</a> |
+                    <a th:href="@{/carleases/delete/{id}(id=${lease.id})}" onclick="return confirm('Are you sure you want to delete this lease?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

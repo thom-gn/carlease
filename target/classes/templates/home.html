@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Home</title>
+	    <script>
+	        async function fetchSessionToken() {
+	            try {
+	                const response = await fetch('/myapp/session/token');
+	                if (response.ok) {
+	                    const accessToken = await response.text();
+	                    document.getElementById('tokenDisplay').textContent = accessToken;
+	                } else {
+	                    console.error('Failed to fetch token');
+	                }
+	            } catch (error) {
+	                console.error('Error fetching token:', error);
+	            }
+	        }
+	
+	        window.onload = fetchSessionToken;
+	    </script>
+	</head>
+	<body>
+	    <h1>Welcome to the Home Page!</h1>
+		<h2>api data:</h2>
+	    <span id="tokenDisplay"></span></p>
+	</body>
+</html>
