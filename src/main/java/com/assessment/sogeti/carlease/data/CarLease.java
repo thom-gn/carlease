@@ -72,4 +72,16 @@ public class CarLease {
         return bd.doubleValue();
  
     }
+    
+    @Override
+    public String toString() {
+        return "CarLease{" +
+                "id=" + id +
+                ", car=" + car + // Ensure `Car` has a `toString()` method too
+                ", customer=" + customer + // Assuming you have a customer field
+                ", mileage=" + mileage +
+                ", duration=" + duration +
+                ", interestRate=" + interestRate +
+                '}';
+    }
 }

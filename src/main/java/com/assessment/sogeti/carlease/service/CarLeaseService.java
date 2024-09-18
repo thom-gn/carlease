@@ -3,6 +3,8 @@ package com.assessment.sogeti.carlease.service;
 import com.assessment.sogeti.carlease.data.CarLease;
 import com.assessment.sogeti.carlease.data.Car;
 import com.assessment.sogeti.carlease.data.Customer;
+import com.assessment.sogeti.carlease.exception.CarNotFoundException;
+import com.assessment.sogeti.carlease.exception.CustomerNotFoundException;
 import com.assessment.sogeti.carlease.repository.CarLeaseRepository;
 import com.assessment.sogeti.carlease.repository.CarRepository;
 import com.assessment.sogeti.carlease.repository.CustomerRepository;
@@ -31,7 +33,9 @@ public class CarLeaseService {
         return carLeaseRepository.findById(id).orElseThrow(() -> new RuntimeException("CarLease not found"));
     }
 
-    public void addCarLease(CarLease carLease) {
+    public CarLease addCarLease(CarLease carLease) {
+    	System.out.println("aaa");
+    	System.out.println(carLease.getCar());
         // Ensure Car and Customer exist
         Car car = carRepository.findById(carLease.getCar().getId())
                 .orElseThrow(() -> new RuntimeException("Car not found"));
@@ -40,23 +44,23 @@ public class CarLeaseService {
 
         carLease.setCar(car);
         carLease.setCustomer(customer);
-        carLeaseRepository.save(carLease);
+        return carLeaseRepository.save(carLease);
     }
 
-    public void updateCarLease(int id, CarLease carLease) {
+    public CarLease updateCarLease(int id, CarLease carLease) {
         if (!carLeaseRepository.existsById(id)) {
             throw new RuntimeException("CarLease not found");
         }
 
         Car car = carRepository.findById(carLease.getCar().getId())
-                .orElseThrow(() -> new RuntimeException("Car not found"));
+                .orElseThrow(() -> new CarNotFoundException(carLease.getCar().getId()));
         Customer customer = customerRepository.findById(carLease.getCustomer().getId())
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+                .orElseThrow(() -> new CustomerNotFoundException(carLease.getCustomer().getId()));
 
         carLease.setId(id);
         carLease.setCar(car);
         carLease.setCustomer(customer);
-        carLeaseRepository.save(carLease);
+        return carLeaseRepository.save(carLease);
     }
 
     public void removeCarLease(int id) {

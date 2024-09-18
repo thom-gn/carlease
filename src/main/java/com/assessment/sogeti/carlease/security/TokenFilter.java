@@ -33,8 +33,16 @@ public class TokenFilter extends OncePerRequestFilter  {
             throws ServletException, IOException {
         
         if (!apiRequestMatcher.matches(request)) {
-            chain.doFilter(request, response);
-            return;
+            String token = (String) request.getSession().getAttribute("access_token");
+            AccessToken storedToken = tokenService.getTokenFromStore(token);
+
+            if (storedToken != null && tokenService.isTokenValid(storedToken)) {
+                chain.doFilter(request, response); 
+                return;
+            } else {
+            	//invalidate session so dat user retrieves new access token due to re-authenticate
+                request.getSession().invalidate();
+            }
         }
 
         String accessToken = request.getHeader("Authorization");            
@@ -42,7 +50,6 @@ public class TokenFilter extends OncePerRequestFilter  {
             accessToken = accessToken.substring(7); // Remove "Bearer " prefix
 
             AccessToken storedToken = tokenService.getTokenFromStore(accessToken);
-            System.out.println("storedToken: " + storedToken);
             if (storedToken != null && tokenService.isTokenValid(storedToken)) {
                 // Token is valid, proceed with the request
                 // Set the authentication in the Spring Security context
@@ -58,7 +65,6 @@ public class TokenFilter extends OncePerRequestFilter  {
 
         } else {
             // Token is not present in the request
-            //chain.doFilter(request, response);
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token is missing");
         }
     }
